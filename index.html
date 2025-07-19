@@ -1,85 +1,438 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Facial Intake Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Skin Lab 28 | Client Intake Form</title>
+  
+  <!-- Google Fonts for the elegant style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,300&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- Clinical & Elegant Theme --- */
+    :root {
+      --font-heading: 'Cormorant Garamond', serif;
+      --font-body: 'Montserrat', sans-serif;
+      --color-text: #333333;
+      --color-primary: #000000;
+      --color-border: #e0e0e0;
+      --color-border-focus: #000000;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      line-height: 1.7;
+      background-image: url('https://www.advancedsciencenews.com/wp-content/uploads/2022/07/Hand-writing-in-a-notebook-black-and-white..jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      padding: 40px 20px;
+    }
+
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px;
+      background-color: rgba(255, 255, 255, 0.96);
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+      font-family: var(--font-heading);
+      text-align: center;
+      color: var(--color-primary);
+      font-size: 3.5em;
+      font-style: italic;
+      font-weight: 300; 
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      font-family: var(--font-body);
+      text-align: center;
+      color: #666;
+      font-size: 1.2em;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    fieldset {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      padding: 30px 0;
+      margin-bottom: 20px;
+    }
+    fieldset:first-of-type { border-top: none; }
+
+    legend {
+      font-family: var(--font-heading);
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--color-text);
+      padding-right: 20px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 1px solid var(--color-border);
+      background-color: #ffffff;
+      border-radius: 4px;
+      font-size: 1em;
+      font-family: var(--font-body);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--color-border-focus);
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    textarea { resize: vertical; min-height: 120px; }
+
+    .checkbox-group label, .radio-group label {
+      display: inline-block;
+      font-weight: 400;
+      margin-right: 25px;
+    }
+
+    input[type="checkbox"], input[type="radio"] {
+      margin-right: 10px;
+      transform: scale(1.1);
+      accent-color: var(--color-primary);
+    }
+    
+    .inline-fields { display: flex; flex-wrap: wrap; gap: 20px; }
+    .inline-fields > div { flex: 1; min-width: 250px; }
+
+    button, .button {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: var(--color-primary);
+      color: #ffffff;
+      border: 2px solid var(--color-primary);
+      border-radius: 4px;
+      font-size: 1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      margin-right: 10px; margin-bottom: 10px;
+    }
+    button:hover, .button:hover { background-color: #444; border-color: #444; }
+    button.secondary { background-color: transparent; color: var(--color-primary); }
+    button.secondary:hover { background-color: rgba(0, 0, 0, 0.05); }
+    button[type="submit"] {
+      width: 100%;
+      font-size: 1.2em;
+      padding: 18px;
+      margin-top: 15px;
+    }
+    button:disabled {
+        background-color: #cccccc;
+        border-color: #cccccc;
+        color: #666;
+        cursor: not-allowed;
+    }
+
+    .signature-pad-container {
+        border: 2px dashed var(--color-border);
+        border-radius: 4px;
+        position: relative;
+        width: 100%;
+        height: 200px;
+        margin: 0 auto 15px auto;
+        background-color: #fafafa;
+    }
+    #signature-pad { width: 100%; height: 100%; }
+    
+  </style>
 </head>
 <body>
-  <h1>Facial Intake Form</h1>
-  <form action="https://formsubmit.co/edytapatyk123@gmail.com" method="POST">
-    
-    <!-- Anti-spam -->
-    <input type="text" name="_honey" style="display:none">
-    <input type="hidden" name="_captcha" value="false">
 
-    <!-- Redirect after successful submit -->
-    <input type="hidden" name="_next" value="https://edytapatyk.github.io/forum-test/thankyou.html">
+  <div class="form-container">
+    <h1>The Skin Lab 28</h1>
+    <h2>Client Intake Form</h2>
 
-    <!-- Personal Info -->
-    <label>Full Name:</label><br>
-    <input type="text" name="Full Name" required><br><br>
+    <form id="intake-form" action="https://formsubmit.co/edytapatyk123@gmail.com" method="POST" enctype="multipart/form-data">
+      
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://theskinlab28.com/thankyou">
+      <input type="hidden" name="_subject" value="New Client Intake Form - The Skin Lab 28">
 
-    <label>Email Address:</label><br>
-    <input type="email" name="Email" required><br><br>
+      <!-- Section 1: Personal Information -->
+      <fieldset>
+        <legend>Personal Information</legend>
+        <div class="inline-fields">
+          <div><label for="fullName">Full Name:</label><input type="text" id="fullName" name="Full Name" required></div>
+          <div><label for="dob">Date of Birth:</label><input type="date" id="dob" name="Date of Birth" required></div>
+        </div>
+        <div class="inline-fields">
+            <div><label for="email">Email Address:</label><input type="email" id="email" name="Email" required></div>
+            <div><label for="phone">Phone Number:</label><input type="tel" id="phone" name="Phone"></div>
+        </div>
+      </fieldset>
 
-    <label>Phone Number:</label><br>
-    <input type="tel" name="Phone"><br><br>
+      <!-- Section 2: Skin Profile -->
+      <fieldset>
+        <legend>Skin Profile</legend>
+        <label for="skinType">How would you describe your skin type?</label>
+        <select id="skinType" name="Skin Type" required>
+          <option value="" disabled selected>-- Please Select --</option>
+          <option value="Dry">Dry (feels tight, may be flaky)</option>
+          <option value="Oily">Oily (feels greasy, looks shiny)</option>
+          <option value="Combination">Combination (oily in t-zone, dry/normal elsewhere)</option>
+          <option value="Sensitive">Sensitive (reacts easily, often red)</option>
+          <option value="Normal">Normal (balanced, not too oily or dry)</option>
+          <option value="Not Sure">I'm Not Sure</option>
+        </select>
+        
+        <label>Primary skin concerns (Check all that apply)</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="Concerns[]" value="Acne/Breakouts"> Acne / Breakouts</label>
+            <label><input type="checkbox" name="Concerns[]" value="Blackheads/Congestion"> Congestion</label>
+            <label><input type="checkbox" name="Concerns[]" value="Fine Lines/Wrinkles"> Fine Lines/Wrinkles</label>
+            <label><input type="checkbox" name="Concerns[]" value="Pigmentation/Sun Spots"> Pigmentation</label>
+            <label><input type="checkbox" name="Concerns[]" value="Redness/Rosacea"> Redness</label>
+            <label><input type="checkbox" name="Concerns[]" value="Dullness"> Dullness</label>
+            <label><input type="checkbox" name="Concerns[]" value="Dehydration"> Dehydration</label>
+            <label><input type="checkbox" name="Concerns[]" value="Loss of Firmness"> Loss of Firmness</label>
+        </div>
+        <br>
+        
+        <label>How does your skin feel immediately after cleansing?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="Post-Cleanse Feel" value="Tight and Dry"> Tight and Dry</label>
+            <label><input type="radio" name="Post-Cleanse Feel" value="Comfortable"> Comfortable</label>
+            <label><input type="radio" name="Post-Cleanse Feel" value="Still Oily"> Still Oily/Unclean</label>
+        </div>
+        <br>
 
-    <label>Date of Birth:</label><br>
-    <input type="date" name="Date of Birth"><br><br>
+        <label>For those who menstruate, do you experience breakouts related to your cycle?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="Hormonal Breakouts" value="Yes"> Yes</label>
+            <label><input type="radio" name="Hormonal Breakouts" value="No"> No</label>
+            <label><input type="radio" name="Hormonal Breakouts" value="N/A"> Not Applicable</label>
+        </div>
+        <br>
+      </fieldset>
 
-    <!-- Skin Concerns -->
-    <label>What are your main skin concerns?</label><br>
-    <textarea name="Skin Concerns" rows="4" required></textarea><br><br>
+      <!-- Section 3: Treatment Goals & Preferences -->
+      <fieldset>
+        <legend>Treatment Goals</legend>
+        <label for="skinGoals">In your own words, what is your number one goal for your skin?</label>
+        <textarea id="skinGoals" name="Skincare Goals" rows="3" placeholder="e.g., To clear up my acne and have an even skin tone." required></textarea>
 
-    <label>What are your skincare goals?</label><br>
-    <textarea name="Skincare Goals" rows="4" required></textarea><br><br>
+        <label for="treatmentInterest">Are you interested in a specific treatment today? (e.g., Relaxing Facial, Chemical Peel, Microneedling)</label>
+        <input type="text" id="treatmentInterest" name="Treatment of Interest" placeholder="If not sure, type 'Esthetician's Recommendation'">
 
-    <!-- Skin Type -->
-    <label>Skin Type:</label><br>
-    <select name="Skin Type" required>
-      <option value="Dry">Dry</option>
-      <option value="Oily">Oily</option>
-      <option value="Combination">Combination</option>
-      <option value="Sensitive">Sensitive</option>
-      <option value="Normal">Normal</option>
-      <option value="Not Sure">Not Sure</option>
-    </select><br><br>
+        <label for="pastTreatmentsGood">What treatments or products have worked well for your skin in the past?</label>
+        <textarea id="pastTreatmentsGood" name="Past Successes" rows="3"></textarea>
 
-    <!-- Allergies -->
-    <label>Do you have any allergies (e.g. ingredients, medications)?</label><br>
-    <textarea name="Allergies" rows="3"></textarea><br><br>
+        <label for="pastTreatmentsBad">What treatments or products have caused a negative reaction or did not work for you?</label>
+        <textarea id="pastTreatmentsBad" name="Past Failures" rows="3"></textarea>
+      </fieldset>
 
-    <!-- Medications -->
-    <label>Are you currently taking any medications (oral or topical)?</label><br>
-    <textarea name="Medications" rows="3"></textarea><br><br>
+      <!-- Section 4: Lifestyle Factors -->
+      <fieldset>
+          <legend>Lifestyle Factors</legend>
+          <div class="inline-fields">
+            <div>
+              <label>Average daily water intake?</label>
+              <select name="Water Intake">
+                  <option value="Less than 4 glasses">Less than 4 glasses</option>
+                  <option value="4-8 glasses">4-8 glasses</option>
+                  <option value="More than 8 glasses">More than 8 glasses</option>
+              </select>
+            </div>
+            <div>
+              <label>How often do you wear sunscreen?</label>
+              <select name="Sunscreen Use">
+                  <option value="Daily">Daily</option>
+                  <option value="Sometimes">Sometimes</option>
+                  <option value="Rarely/Never">Rarely/Never</option>
+              </select>
+            </div>
+          </div>
+          <div class="inline-fields">
+            <div>
+              <label>Average hours of sleep per night?</label>
+              <select name="Sleep Habits">
+                  <option value="Less than 5">Less than 5 hours</option>
+                  <option value="5-6">5-6 hours</option>
+                  <option value="7-8">7-8 hours</option>
+                  <option value="More than 8">More than 8 hours</option>
+              </select>
+            </div>
+            <div>
+              <label>How would you describe your diet?</label>
+              <select name="Diet Description">
+                  <option value="Very Healthy">Very Healthy (Whole foods, low sugar)</option>
+                  <option value="Generally Balanced">Generally Balanced</option>
+                  <option value="High in Processed Foods/Sugar">High in Processed Foods/Sugar</option>
+              </select>
+            </div>
+          </div>
+          <label for="occupation">What is your occupation?</label>
+          <input type="text" id="occupation" name="Occupation" placeholder="e.g., Office Worker, Nurse, Outdoor Work, Student">
+      </fieldset>
+      
+      <!-- Section 5: Medical History -->
+      <fieldset>
+        <legend>Medical History</legend>
+        <label>Please list any known allergies (medications, food, topical ingredients, latex, etc.)</label>
+        <textarea name="Allergies" rows="3" placeholder="If none, please write 'None'"></textarea>
 
-    <!-- Health Conditions -->
-    <label>Do you have any medical conditions we should know about?</label><br>
-    <textarea name="Medical Conditions" rows="3"></textarea><br><br>
+        <label>Please list all medications, vitamins, and supplements (oral and topical)</label>
+        <textarea name="Medications List" rows="3" placeholder="e.g., Birth control, Accutane, Retin-A, Antibiotics, Aspirin..."></textarea>
+        
+        <label>Do you have any of the following? (Check all that apply)</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="Medical Conditions[]" value="Herpes Simplex (Cold Sores)"> Herpes Simplex (Cold Sores)</label>
+            <label><input type="checkbox" name="Medical Conditions[]" value="Eczema/Psoriasis"> Eczema/Psoriasis</label>
+            <label><input type="checkbox" name="Medical Conditions[]" value="Diabetes"> Diabetes</label>
+            <label><input type="checkbox" name="Medical Conditions[]" value="Autoimmune Disorder"> Autoimmune Disorder</label>
+            <label><input type="checkbox" name="Medical Conditions[]" value="Pacemaker/Metal Implants"> Pacemaker/Metal Implants</label>
+            <label><input type="checkbox" name="Medical Conditions[]" value="History of Keloid Scarring"> History of Keloid Scarring</label>
+        </div>
+        <br>
+        
+        <label>Are you pregnant, planning to be, or breastfeeding?</label>
+        <select name="Pregnancy">
+          <option value="No">No</option>
+          <option value="Yes, I am pregnant">Yes, I am pregnant</option>
+          <option value="Yes, I am planning to be">Yes, I am planning to be</option>
+          <option value="Yes, I am breastfeeding">Yes, I am breastfeeding</option>
+        </select>
+      </fieldset>
+      
+      <!-- Section 6: Client Photo -->
+      <fieldset>
+        <legend>Client Photo</legend>
+        <p style="text-align:center; color:#555; margin-top:0; font-size: 0.9em;">A photo helps us track your progress and is kept strictly confidential.</p>
+        <div class="camera-section" style="text-align: center;">
+            <button type="button" id="start-camera" class="button">Start Camera</button>
+            <video id="video-feed" playsinline autoplay style="background: #eee; border: 1px solid var(--color-border); border-radius: 4px; width: 100%; max-width: 300px; display: none; margin: 10px auto;"></video>
+            <button type="button" id="capture-photo" class="button" style="display:none;">Take Picture</button>
+            <img id="photo-preview" alt="Your captured photo" style="border: 2px dashed var(--color-border); border-radius: 4px; width: 100%; max-width: 300px; display: none; margin: 10px auto;">
+            <textarea name="Client Photo (Base64)" id="photo-data" style="display:none;"></textarea>
+        </div>
+      </fieldset>
 
-    <!-- Treatments -->
-    <label>Have you had any recent facial treatments or chemical peels?</label><br>
-    <textarea name="Recent Treatments" rows="3"></textarea><br><br>
+      <!-- Section 7: Signature & Consent -->
+      <fieldset>
+        <legend>Consent & Signature</legend>
+        <label class="consent-label" style="font-weight: 400; font-size: 0.9em;">
+          <input type="checkbox" name="Consent_Clause" value="Agreed" required style="vertical-align: top; margin-top: 4px;">
+          I certify that the information I have provided is accurate and complete. I understand that withholding information may result in contraindications or skin irritation. I consent to receiving treatment and having my photo taken for clinical documentation. I agree to inform the esthetician of any discomfort I may experience.
+        </label>
+        <br><br>
+        <label for="signature-pad">Please sign in the box below:</label>
+        <div class="signature-pad-container">
+            <canvas id="signature-pad"></canvas>
+        </div>
+        <div class="signature-section" style="text-align: center;">
+            <button type="button" id="clear-signature" class="button secondary">Clear</button>
+            <button type="button" id="save-signature" class="button">Save Signature</button>
+        </div>
+        <textarea name="Signature (Base64)" id="signature-data" required style="display:none;"></textarea>
+      </fieldset>
 
-    <!-- Products Used -->
-    <label>List the skincare products you currently use:</label><br>
-    <textarea name="Current Skincare Products" rows="3"></textarea><br><br>
+      <!-- Submit Button -->
+      <button type="submit" id="submit-form-button" disabled>Submit Intake Form</button>
+      <p id="submit-warning" style="text-align:center; color: #c0392b; font-weight: bold; margin-top: 10px;">Please save your signature to enable submission.</p>
+    </form>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const startCameraButton = document.getElementById('start-camera');
+      const capturePhotoButton = document.getElementById('capture-photo');
+      const videoFeed = document.getElementById('video-feed');
+      const photoPreview = document.getElementById('photo-preview');
+      const photoData = document.getElementById('photo-data');
+      let stream = null;
+      startCameraButton.addEventListener('click', async () => {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+          videoFeed.srcObject = stream;
+          videoFeed.style.display = 'block';
+          startCameraButton.style.display = 'none';
+          capturePhotoButton.style.display = 'inline-block';
+        } catch (err) { console.error("Error accessing camera: ", err); alert("Could not access the camera. Please check permissions."); }
+      });
+      capturePhotoButton.addEventListener('click', () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = videoFeed.videoWidth;
+        canvas.height = videoFeed.videoHeight;
+        canvas.getContext('2d').drawImage(videoFeed, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/jpeg');
+        photoPreview.src = dataUrl;
+        photoPreview.style.display = 'block';
+        photoData.value = dataUrl;
+        if (stream) { stream.getTracks().forEach(track => track.stop()); }
+        videoFeed.style.display = 'none';
+        capturePhotoButton.textContent = 'Retake Picture';
+        startCameraButton.style.display = 'inline-block';
+      });
+      const canvas = document.getElementById('signature-pad');
+      const signaturePad = new SignaturePad(canvas, { backgroundColor: 'rgb(250, 250, 250)' });
+      const clearButton = document.getElementById('clear-signature');
+      const saveButton = document.getElementById('save-signature');
+      const signatureData = document.getElementById('signature-data');
+      const submitButton = document.getElementById('submit-form-button');
+      const submitWarning = document.getElementById('submit-warning');
+      clearButton.addEventListener('click', () => {
+        signaturePad.clear();
+        signatureData.value = '';
+        submitButton.disabled = true;
+        submitWarning.style.display = 'block';
+        saveButton.textContent = 'Save Signature';
+      });
+      saveButton.addEventListener('click', () => {
+        if (signaturePad.isEmpty()) { alert("Please provide a signature first."); } 
+        else {
+          signatureData.value = signaturePad.toDataURL('image/png');
+          submitButton.disabled = false;
+          submitWarning.style.display = 'none';
+          alert("Signature saved. You can now submit the form.");
+          saveButton.textContent = 'Signature Saved!';
+        }
+      });
+      function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        signaturePad.clear();
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+    });
+  </script>
 
-    <!-- Pregnant -->
-    <label>Are you currently pregnant or breastfeeding?</label><br>
-    <select name="Pregnancy">
-      <option value="No">No</option>
-      <option value="Yes">Yes</option>
-    </select><br><br>
-
-    <!-- Consent -->
-    <label>
-      <input type="checkbox" name="Consent" required>
-      I consent to receiving facial treatment and understand the potential risks involved.
-    </label><br><br>
-
-    <!-- Submit -->
-    <button type="submit">Submit Form</button>
-  </form>
 </body>
 </html>
