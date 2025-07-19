@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Form to Email</title>
+</head>
+<body>
+  <h1>Contact / Forum Form</h1>
+  <form action="https://formsubmit.co/jakubpatyk222@gmail.com" method="POST">
+    <input type="text" name="title" placeholder="Title" required><br><br>
+    <textarea name="content" placeholder="Your message" required></textarea><br><br>
+    
+    <!-- Optional: Prevent spam bots -->
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- Optional: redirect after submit -->
+    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+
+    <!-- Optional: disable captcha -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <button type="submit">Send</button>
+  </form>
+</body>
+</html>
