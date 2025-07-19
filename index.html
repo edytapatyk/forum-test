@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Skin Lab 28 | Client Intake Form</title>
   
-  <!-- Google Fonts for the elegant style -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,300&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -20,9 +19,7 @@
       --color-border: #e0e0e0;
       --color-border-focus: #000000;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: var(--font-body);
       color: var(--color-text);
@@ -34,7 +31,6 @@
       background-attachment: fixed;
       padding: 40px 20px;
     }
-
     .form-container {
       max-width: 800px;
       margin: 0 auto;
@@ -44,7 +40,6 @@
       border-radius: 4px;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     }
-
     h1 {
       font-family: var(--font-heading);
       text-align: center;
@@ -54,7 +49,6 @@
       font-weight: 300; 
       margin-bottom: 5px;
     }
-
     h2 {
       font-family: var(--font-body);
       text-align: center;
@@ -65,7 +59,6 @@
       text-transform: uppercase;
       margin-bottom: 40px;
     }
-
     fieldset {
       border: none;
       border-top: 1px solid var(--color-border);
@@ -73,7 +66,6 @@
       margin-bottom: 20px;
     }
     fieldset:first-of-type { border-top: none; }
-
     legend {
       font-family: var(--font-heading);
       font-size: 1.8em;
@@ -82,7 +74,6 @@
       padding-right: 20px;
       margin-bottom: 20px;
     }
-
     label {
       display: block;
       margin-bottom: 8px;
@@ -90,7 +81,6 @@
       font-size: 0.9em;
       color: #555;
     }
-
     input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
       width: 100%;
       padding: 14px;
@@ -102,30 +92,24 @@
       font-family: var(--font-body);
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
-
     input:focus, select:focus, textarea:focus {
       border-color: var(--color-border-focus);
       outline: none;
       box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     }
-    
     textarea { resize: vertical; min-height: 120px; }
-
     .checkbox-group label, .radio-group label {
       display: inline-block;
       font-weight: 400;
       margin-right: 25px;
     }
-
     input[type="checkbox"], input[type="radio"] {
       margin-right: 10px;
       transform: scale(1.1);
       accent-color: var(--color-primary);
     }
-    
     .inline-fields { display: flex; flex-wrap: wrap; gap: 20px; }
     .inline-fields > div { flex: 1; min-width: 250px; }
-
     button, .button {
       display: inline-block;
       padding: 12px 25px;
@@ -155,7 +139,6 @@
         color: #666;
         cursor: not-allowed;
     }
-
     .signature-pad-container {
         border: 2px dashed var(--color-border);
         border-radius: 4px;
@@ -166,7 +149,6 @@
         background-color: #fafafa;
     }
     #signature-pad { width: 100%; height: 100%; }
-    
   </style>
 </head>
 <body>
@@ -175,6 +157,7 @@
     <h1>The Skin Lab 28</h1>
     <h2>Client Intake Form</h2>
 
+    <!-- THE FORM TAG PROPERLY OPENS HERE, WRAPPING ALL THE CONTENT -->
     <form id="intake-form" action="https://formsubmit.co/edytapatyk123@gmail.com" method="POST" enctype="multipart/form-data">
       
       <input type="text" name="_honey" style="display:none">
@@ -357,12 +340,14 @@
             <button type="button" id="clear-signature" class="button secondary">Clear</button>
             <button type="button" id="save-signature" class="button">Save Signature</button>
         </div>
-        <textarea name="Signature (Base64)" id="signature-data" required style="display:none;"></textarea>
+        <textarea name="Signature (Base64)" id="signature-data" style="display:none;"></textarea>
       </fieldset>
 
       <!-- Submit Button -->
       <button type="submit" id="submit-form-button" disabled>Submit Intake Form</button>
       <p id="submit-warning" style="text-align:center; color: #c0392b; font-weight: bold; margin-top: 10px;">Please save your signature to enable submission.</p>
+
+    <!-- THE FORM TAG PROPERLY CLOSES HERE, WRAPPING ALL THE CONTENT -->
     </form>
   </div>
   
