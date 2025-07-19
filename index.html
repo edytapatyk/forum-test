@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Forum Form - Email Submission</title>
+  <title>Send to Edyta</title>
 </head>
 <body>
-  <h1>Send a Message</h1>
+  <h1>Send a Message to Edyta</h1>
   <form action="https://formsubmit.co/edytapatyk123@gmail.com" method="POST">
-    <!-- Form Fields -->
-    <input type="text" name="title" placeholder="Title" required><br><br>
-    <textarea name="content" placeholder="Your message" required></textarea><br><br>
-
-    <!-- Hidden Anti-Spam Field -->
+    <!-- Hidden Anti-Bot Field -->
     <input type="text" name="_honey" style="display:none">
+
+    <!-- Force sending to your email -->
+    <input type="hidden" name="_to" value="edytapatyk123@gmail.com">
 
     <!-- No CAPTCHA -->
     <input type="hidden" name="_captcha" value="false">
@@ -19,7 +18,10 @@
     <!-- Redirect After Submit (optional) -->
     <input type="hidden" name="_next" value="https://thankyou.page/">
 
-    <!-- Submit -->
+    <!-- Message Fields -->
+    <input type="text" name="title" placeholder="Title" required><br><br>
+    <textarea name="content" placeholder="Your message" required></textarea><br><br>
+
     <button type="submit">Send</button>
   </form>
 </body>
