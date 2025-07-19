@@ -1,28 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Send to Edyta</title>
+  <title>Facial Intake Form</title>
 </head>
 <body>
-  <h1>Send a Message to Edyta</h1>
+  <h1>Facial Intake Form</h1>
   <form action="https://formsubmit.co/edytapatyk123@gmail.com" method="POST">
-    <!-- Hidden Anti-Bot Field -->
+    
+    <!-- Anti-spam -->
     <input type="text" name="_honey" style="display:none">
-
-    <!-- Force sending to your email -->
-    <input type="hidden" name="_to" value="edytapatyk123@gmail.com">
-
-    <!-- No CAPTCHA -->
     <input type="hidden" name="_captcha" value="false">
-
-    <!-- Redirect After Submit (optional) -->
     <input type="hidden" name="_next" value="https://thankyou.page/">
 
-    <!-- Message Fields -->
-    <input type="text" name="title" placeholder="Title" required><br><br>
-    <textarea name="content" placeholder="Your message" required></textarea><br><br>
+    <!-- Personal Info -->
+    <label>Full Name:</label><br>
+    <input type="text" name="Full Name" required><br><br>
 
-    <button type="submit">Send</button>
+    <label>Email Address:</label><br>
+    <input type="email" name="Email" required><br><br>
+
+    <label>Phone Number:</label><br>
+    <input type="tel" name="Phone"><br><br>
+
+    <label>Date of Birth:</label><br>
+    <input type="date" name="Date of Birth"><br><br>
+
+    <!-- Skin Concerns -->
+    <label>What are your main skin concerns?</label><br>
+    <textarea name="Skin Concerns" rows="4" required></textarea><br><br>
+
+    <label>What are your skincare goals?</label><br>
+    <textarea name="Skincare Goals" rows="4" required></textarea><br><br>
+
+    <!-- Skin Type -->
+    <label>Skin Type:</label><br>
+    <select name="Skin Type" required>
+      <option value="Dry">Dry</option>
+      <option value="Oily">Oily</option>
+      <option value="Combination">Combination</option>
+      <option value="Sensitive">Sensitive</option>
+      <option value="Normal">Normal</option>
+      <option value="Not Sure">Not Sure</option>
+    </select><br><br>
+
+    <!-- Allergies -->
+    <label>Do you have any allergies (e.g. ingredients, medications)?</label><br>
+    <textarea name="Allergies" rows="3"></textarea><br><br>
+
+    <!-- Medications -->
+    <label>Are you currently taking any medications (oral or topical)?</label><br>
+    <textarea name="Medications" rows="3"></textarea><br><br>
+
+    <!-- Health Conditions -->
+    <label>Do you have any medical conditions we should know about?</label><br>
+    <textarea name="Medical Conditions" rows="3"></textarea><br><br>
+
+    <!-- Treatments -->
+    <label>Have you had any recent facial treatments or chemical peels?</label><br>
+    <textarea name="Recent Treatments" rows="3"></textarea><br><br>
+
+    <!-- Products Used -->
+    <label>List the skincare products you currently use:</label><br>
+    <textarea name="Current Skincare Products" rows="3"></textarea><br><br>
+
+    <!-- Pregnant -->
+    <label>Are you currently pregnant or breastfeeding?</label><br>
+    <select name="Pregnancy">
+      <option value="No">No</option>
+      <option value="Yes">Yes</option>
+    </select><br><br>
+
+    <!-- Consent -->
+    <label>
+      <input type="checkbox" name="Consent" required>
+      I consent to receiving facial treatment and understand the potential risks involved.
+    </label><br><br>
+
+    <!-- Submit -->
+    <button type="submit">Submit Form</button>
   </form>
 </body>
 </html>
