@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Skin Consultation Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* UK Spelling for CSS Variables */
+      --primary-colour: #0056b3;
+      --primary-hover-colour: #004494;
+      --light-grey-colour: #f8f9fa;
+      --medium-grey-colour: #e9ecef;
+      --dark-grey-colour: #495057;
+      --text-colour: #212529;
+      --white-colour: #ffffff;
+      --border-colour: #ced4da;
+      --success-colour: #28a745;
+      --danger-colour: #dc3545;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-grey-colour);
+      color: var(--text-colour);
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    form {
+      background: var(--white-colour);
+      padding: 25px 40px;
+      max-width: 800px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    h2, .intro-text {
+      text-align: center;
+    }
+
+    h2 {
+      color: var(--primary-colour);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .intro-text {
+      margin-bottom: 40px;
+      font-style: italic;
+      color: var(--dark-grey-colour);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border-colour);
+      border-radius: 6px;
+      box-sizing: border-box;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-colour);
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-top: 20px;
+      color: var(--dark-grey-colour);
+    }
+
+    fieldset {
+      border: 1px solid var(--medium-grey-colour);
+      border-radius: 8px;
+      padding: 20px 25px;
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+
+    legend {
+      font-weight: 600;
+      color: var(--primary-colour);
+      padding: 0 10px;
+      font-size: 1.1em;
+    }
+
+    .checkbox-group div, .radio-group div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: auto;
+      margin-right: 12px;
+      margin-top: 0;
+      margin-bottom: 0;
+      accent-color: var(--primary-colour);
+    }
+
+    .checkbox-group label, .radio-group label {
+      font-weight: 400;
+      margin-top: 0;
+      color: var(--text-colour);
+    }
+
+    .address-group, .name-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+    
+    #signature-pad-container {
+      position: relative;
+    }
+
+    #signature-pad {
+      border: 2px dashed var(--border-colour);
+      border-radius: 6px;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    #clear-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--dark-grey-colour);
+      color: var(--white-colour);
+      border: none;
+      padding: 5px 10px;
+      font-size: 0.8em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #clear-button:hover {
+      background: var(--danger-colour);
+    }
+    
+    button[type="submit"] {
+      background: var(--primary-colour);
+      color: var(--white-colour);
+      padding: 15px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 500;
+      width: 100%;
+      margin-top: 30px;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    button[type="submit"]:hover {
+      background: var(--primary-hover-colour);
+      transform: translateY(-2px);
+    }
+    
+    .feature-note {
+      background-color: var(--light-grey-colour);
+      border: 1px dashed var(--border-colour);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 25px;
+      margin-bottom: 25px;
+      text-align: center;
+      color: var(--dark-grey-colour);
+    }
+
+    @media (max-width: 600px) {
+      .address-group, .name-group {
+        grid-template-columns: 1fr;
+      }
+      form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <form id="consultation-form" action="https://formspree.io/f/xblkdoqo" method="POST">
+    
+    <h2>Online Skin Consultation</h2>
+    <p class="intro-text">
+      Please fill this form out in as much detail as possible. The form will help to paint a picture of what could be going on with your skin, and will enable me to make the right recommendations as a result.
+    </p>
+
+    <!-- Personal Info -->
+    <fieldset>
+      <legend>Personal Information</legend>
+      <div class="name-group">
+        <div>
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" name="first_name" required>
+        </div>
+        <div>
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" name="last_name" required>
+        </div>
+      </div>
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" placeholder="dd/mm/yyyy" required>
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" required>
+      <label for="occupation">Occupation</label>
+      <input type="text" id="occupation" name="occupation">
+    </fieldset>
+
+    <!-- Contact Info -->
+    <fieldset>
+      <legend>Contact Information</legend>
+      <label for="phone-number">Phone Number</label>
+      <input type="tel" id="phone-number" name="phone_number" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="_replyto" placeholder="example@example.com" required>
+    </fieldset>
+
+    <!-- Address -->
+    <fieldset>
+      <legend>Address</legend>
+      <div class="address-group">
+        <div class="full-width">
+          <label for="street-address">Street Address</label>
+          <input type="text" id="street-address" name="street_address">
+        </div>
+        <div class="full-width">
+          <label for="street-address-2">Street Address Line 2</label>
+          <input type="text" id="street-address-2" name="street_address_2">
+        </div>
+        <div>
+          <label for="city">City</label>
+          <input type="text" id="city" name="city">
+        </div>
+        <div>
+          <label for="county">County / Region</label>
+          <input type="text" id="county" name="county">
+        </div>
+        <div class="full-width">
+          <label for="postcode">Postcode</label>
+          <input type="text" id="postcode" name="postcode">
+        </div>
+      </div>
+    </fieldset>
+    
+    <!-- GP Address -->
+    <fieldset>
+      <legend>GP Address (Optional)</legend>
+      <div class="address-group">
+        <div class="full-width">
+          <label for="gp-street-address">Street Address</label>
+          <input type="text" id="gp-street-address" name="gp_street_address">
+        </div>
+        <div class="full-width">
+          <label for="gp-street-address-2">Street Address Line 2</label>
+          <input type="text" id="gp-street-address-2" name="gp_street_address_2">
+        </div>
+        <div>
+          <label for="gp-city">City</label>
+          <input type="text" id="gp-city" name="gp_city">
+        </div>
+        <div>
+          <label for="gp-county">County / Region</label>
+          <input type="text" id="gp-county" name="gp_county">
+        </div>
+        <div class="full-width">
+          <label for="gp-postcode">Postcode</label>
+          <input type="text" id="gp-postcode" name="gp_postcode">
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- All other fieldsets remain unchanged -->
+    <fieldset>
+        <legend>Medical History - Contraindications</legend>
+        <p>Are you suffering from any of the following?</p>
+        <div class="checkbox-group">
+            <div><input type="checkbox" id="impetigo" name="contraindications[]" value="Impetigo"><label for="impetigo">Infectious diseases Eg. Impetigo</label></div>
+            <div><input type="checkbox" id="boils" name="contraindications[]" value="Boils"><label for="boils">Boils</label></div>
+            <div><input type="checkbox" id="ringworm" name="contraindications[]" value="Ringworm"><label for="ringworm">Ringworm</label></div>
+            <div><input type="checkbox" id="coldsore" name="contraindications[]" value="Coldsore (herpes simplex)"><label for="coldsore">Coldsore (herpes simplex)</label></div>
+            <div><input type="checkbox" id="chickenpox" name="contraindications[]" value="Chicken pox"><label for="chickenpox">Chicken pox</label></div>
+            <div><input type="checkbox" id="warts" name="contraindications[]" value="Warts"><label for="warts">Warts</label></div>
+            <div><input type="checkbox" id="sunburn" name="contraindications[]" value="Sunburn"><label for="sunburn">Damaged skin Eg. Sunburn</label></div>
+            <div><input type="checkbox" id="conjunctivitis" name="contraindications[]" value="Conjunctivitis"><label for="conjunctivitis">Infectious eye problems Eg. Conjunctivitis</label></div>
+            <div><input type="checkbox" id="scabies" name="contraindications[]" value="Scabies"><label for="scabies">Scabies (or any other infestations)</label></div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Medical History - Conditions</legend>
+        <p>Please tick if any of the following apply to you:</p>
+        <div class="checkbox-group">
+            <div><input type="checkbox" id="diabetes" name="conditions[]" value="Diabetes"><label for="diabetes">Diabetes</label></div>
+            <div><input type="checkbox" id="epilepsy" name="conditions[]" value="Epilepsy"><label for="epilepsy">Epilepsy</label></div>
+            <div><input type="checkbox" id="cancer" name="conditions[]" value="Cancer"><label for="cancer">Cancer</label></div>
+            <div><input type="checkbox" id="blood-pressure" name="conditions[]" value="High or low blood pressure"><label for="blood-pressure">High or low blood pressure</label></div>
+            <div><input type="checkbox" id="pregnancy" name="conditions[]" value="Pregnancy"><label for="pregnancy">Pregnancy</label></div>
+            <div><input type="checkbox" id="skin-disorder" name="conditions[]" value="Skin disorder"><label for="skin-disorder">Skin disorder</label></div>
+            <div><input type="checkbox" id="recent-operation" name="conditions[]" value="Recent operation"><label for="recent-operation">Recent operation</label></div>
+            <div><input type="checkbox" id="heart-disorder" name="conditions[]" value="Heart/cardiac disorder"><label for="heart-disorder">Heart/cardiac disorder</label></div>
+            <div><input type="checkbox" id="thrombosis" name="conditions[]" value="Thrombosis/Phlebitis"><label for="thrombosis">Thrombosis/Phlebitis (blood clots)</label></div>
+            <div><input type="checkbox" id="pacemaker" name="conditions[]" value="Pacemaker or internal metal pins"><label for="pacemaker">Pacemaker or internal metal pins</label></div>
+            <div><input type="checkbox" id="skin-cancer-history" name="conditions[]" value="History of skin cancer"><label for="skin-cancer-history">History of skin cancer</label></div>
+            <div><input type="checkbox" id="thyroid" name="conditions[]" value="Thyroid problem"><label for="thyroid">Thyroid problem</label></div>
+            <div><input type="checkbox" id="medical-treatment" name="conditions[]" value="Currently receiving medical treatment"><label for="medical-treatment">Currently receiving medical treatment</label></div>
+            <div><input type="checkbox" id="tumours" name="conditions[]" value="Tumours, abnormal swelling or lymph oedema"><label for="tumours">Any tumours, abnormal swelling or lymph oedema</label></div>
+            <div><input type="checkbox" id="injectables" name="conditions[]" value="Recent injectables"><label for="injectables">Recently had Botox/Collagen/Injectables</label></div>
+            <div><input type="checkbox" id="contraception" name="conditions[]" value="Contraception/hormonal substitute"><label for="contraception">Contraception/hormonal substitute</label></div>
+            <div><input type="checkbox" id="tattoo" name="conditions[]" value="Tattoo/semi permanent make up"><label for="tattoo">Tattoo/semi permanent make up in the area</label></div>
+        </div>
+        <label for="conditions-notes">If yes to any of the above, please provide notes here</label>
+        <textarea id="conditions-notes" name="conditions_notes" rows="4"></textarea>
+    </fieldset>
+    <fieldset>
+        <legend>Health & Lifestyle</legend>
+        <label for="medication">List of any medication and supplements you are currently taking</label>
+        <textarea id="medication" name="medication" rows="4"></textarea>
+        <label for="surgery">In the last 9 months, have you undergone any surgery? If yes, please specify below.</label>
+        <textarea id="surgery" name="surgery_details" rows="3"></textarea>
+        <label for="health-problems">Any health problems, past and present?</label>
+        <textarea id="health-problems" name="health_problems" rows="3"></textarea>
+        <label for="allergies">Allergies?</label>
+        <textarea id="allergies" name="allergies" rows="3"></textarea>
+        <label for="lifestyle">Lifestyle - sedentary? Exercise regime? Stress levels? How much water do you drink daily (in litres/glasses)?</label>
+        <textarea id="lifestyle" name="lifestyle" rows="4"></textarea>
+        <label for="diet-restrictions">Do you follow a restricted diet - please give details</label>
+        <textarea id="diet-restrictions" name="diet_restrictions" rows="3"></textarea>
+        <label for="alcohol">How much alcohol do you consume per week?</label>
+        <input type="text" id="alcohol" name="alcohol_consumption">
+        <label for="smoking">Do you smoke? If yes, how long for?</label>
+        <input type="text" id="smoking" name="smoking_habits">
+        <label for="caffeine">How many caffeinated beverages daily?</label>
+        <input type="number" id="caffeine" name="caffeine_intake">
+        <label for="daily-food">What does a typical day's food look like for you? Please list brands and include all snacks and drinks. As much information as possible.</label>
+        <textarea id="daily-food" name="daily_food_log" rows="6"></textarea>
+        <label for="daily-routine">What does a typical day look like for you? What do you do as soon as you wake up? Do you work from home or in an office? Do you get outdoors for fresh air and sunlight daily?</label>
+        <textarea id="daily-routine" name="daily_routine_description" rows="5"></textarea>
+    </fieldset>
+    <fieldset>
+      <legend>Skincare History & Routine</legend>
+      <label for="current-routine">Current skincare routine including products?</label>
+      <textarea id="current-routine" name="current_skincare_routine" rows="5"></textarea>
+      <label for="past-treatments">Have you ever had a chemical peel, laser, microdermabrasion or any resurfacing treatments? When?</label>
+      <textarea id="past-treatments" name="past_treatments" rows="3"></textarea>
+      <label for="prescription-products">Have you used Accutane, Retin A, Renova or any other prescription skin products in the last three months?</label>
+      <textarea id="prescription-products" name="prescription_products" rows="3"></textarea>
+      <label for="active-products">Are you currently using any products that contain Glycolic acid, Lactic acid, any Hydroxy acid product, Vitamin A derivatives and any exfoliation scrubs? If yes, which ones and by which brand?</label>
+      <textarea id="active-products" name="active_products" rows="4"></textarea>
+    </fieldset>
+    <fieldset>
+        <legend>Current Skin Concerns</legend>
+        <p>Please check all that apply to your current complaint:</p>
+        <div class="checkbox-group">
+            <div><input type="checkbox" id="breakouts" name="complaint[]" value="Breakouts"><label for="breakouts">Breakouts</label></div>
+            <div><input type="checkbox" id="acne" name="complaint[]" value="Acne"><label for="acne">Acne</label></div>
+            <div><input type="checkbox" id="blackheads" name="complaint[]" value="Blackheads/whiteheads"><label for="blackheads">Blackheads/whiteheads</label></div>
+            <div><input type="checkbox" id="oil" name="complaint[]" value="Excessive oil/shine"><label for="oil">Excessive oil/shine</label></div>
+            <div><input type="checkbox" id="rosacea" name="complaint[]" value="Rosacea"><label for="rosacea">Rosacea</label></div>
+            <div><input type="checkbox" id="capillaries" name="complaint[]" value="Broken capillaries"><label for="capillaries">Broken capillaries</label></div>
+            <div><input type="checkbox" id="redness" name="complaint[]" value="Redness"><label for="redness">Redness</label></div>
+            <div><input type="checkbox" id="uneven-tone" name="complaint[]" value="Uneven skin tone"><label for="uneven-tone">Uneven skin tone</label></div>
+            <div><input type="checkbox" id="sun-damage" name="complaint[]" value="Sun damage/pigmentation"><label for="sun-damage">Sun damage/pigmentation</label></div>
+            <div><input type="checkbox" id="wrinkles" name="complaint[]" value="Wrinkles/fine lines"><label for="wrinkles">Wrinkles/fine lines</label></div>
+            <div><input type="checkbox" id="dull-dry" name="complaint[]" value="Dull/dry skin"><label for="dull-dry">Dull/dry skin</label></div>
+            <div><input type="checkbox" id="flaky" name="complaint[]" value="Flaky skin"><label for="flaky">Flaky skin</label></div>
+            <div><input type="checkbox" id="dehydrated" name="complaint[]" value="Dehydrated"><label for="dehydrated">Dehydrated</label></div>
+            <div><input type="checkbox" id="open-pores" name="complaint[]" value="Open pores"><label for="open-pores">Open pores</label></div>
+        </div>
+        <label for="problem-age">What age did these problems occur?</label>
+        <input type="number" id="problem-age" name="problem_start_age">
+        <p>Are your current skin problems getting more pronounced?</p>
+        <div class="radio-group">
+          <div><input type="radio" id="pronounced_yes" name="problems_pronounced" value="Yes"><label for="pronounced_yes">Yes</label></div>
+          <div><input type="radio" id="pronounced_no" name="problems_pronounced" value="No"><label for="pronounced_no">No</label></div>
+        </div>
+        <label for="previous-treatment">Have you received treatment for this problem before? If yes, when and what method?</label>
+        <textarea id="previous-treatment" name="previous_treatment" rows="3"></textarea>
+    </fieldset>
+    <fieldset>
+        <legend>Skin Sensitivity & Reactions</legend>
+        <p>Do you ever experience these conditions with your skin?</p>
+        <div class="checkbox-group">
+          <div><input type="checkbox" id="exp_flakiness" name="experience[]" value="Flakiness"><label for="exp_flakiness">Flakiness</label></div>
+          <div><input type="checkbox" id="exp_tightness" name="experience[]" value="Tightness"><label for="exp_tightness">Tightness</label></div>
+          <div><input type="checkbox" id="exp_dryness" name="experience[]" value="Obvious dryness"><label for="exp_dryness">Obvious dryness</label></div>
+        </div>
+        <p>Do you burn easily in moderate sunlight?</p>
+        <div class="radio-group">
+            <div><input type="radio" id="burn_yes" name="burn_easily" value="Yes"><label for="burn_yes">Yes</label></div>
+            <div><input type="radio" id="burn_no" name="burn_easily" value="No"><label for="burn_no">No</label></div>
+        </div>
+        <p>Do you have a tendency to redness?</p>
+        <div class="radio-group">
+            <div><input type="radio" id="redness_yes" name="tendency_redness" value="Yes"><label for="redness_yes">Yes</label></div>
+            <div><input type="radio" id="redness_no" name="tendency_redness" value="No"><label for="redness_no">No</label></div>
+        </div>
+        <label for="skin-feel">How does your skin feel on a daily basis? Normal? Oily? Dry?</label>
+        <input type="text" id="skin-feel" name="daily_skin_feel">
+        <p>Are you currently having or due your period?</p>
+        <div class="radio-group">
+            <div><input type="radio" id="period_yes" name="period_status" value="Yes"><label for="period_yes">Yes</label></div>
+            <div><input type="radio" id="period_no" name="period_status" value="No"><label for="period_no">No</label></div>
+            <div><input type="radio" id="period_na" name="period_status" value="N/A"><label for="period_na">N/A</label></div>
+        </div>
+    </fieldset>
+
+    <!-- Final Details -->
+    <fieldset>
+        <legend>Goals & Final Details</legend>
+        <label for="skincare-goals">What are your skincare goals? How can I help you?</label>
+        <textarea id="skincare-goals" name="skincare_goals" rows="5" required></textarea>
+
+        <!-- New section for photo upload notice -->
+        <div class="feature-note">
+            <strong>Photo Uploads Coming Soon!</strong><br>
+            We are working on adding a secure feature that will allow you to take a picture of yourself to send to us directly through this form.
+        </div>
+        
+        <label for="signature-pad">Signature (Please sign below)</label>
+        <div id="signature-pad-container">
+            <canvas id="signature-pad" width="700" height="200"></canvas>
+            <button type="button" id="clear-button">Clear</button>
+        </div>
+        <!-- Hidden input to store the signature data -->
+        <input type="hidden" name="signature" id="signature-data">
+    </fieldset>
+
+    <button type="submit">Submit Consultation</button>
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('consultation-form');
+      const canvas = document.getElementById('signature-pad');
+      const clearButton = document.getElementById('clear-button');
+      const signatureDataInput = document.getElementById('signature-data');
+      const ctx = canvas.getContext('2d');
+      let drawing = false;
+      let hasSigned = false;
+      
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#333';
+
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        if (e.touches && e.touches.length > 0) {
+            return {
+                x: e.touches[0].clientX - rect.left,
+                y: e.touches[0].clientY - rect.top
+            };
+        }
+        return {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        };
+      }
+
+      function startDrawing(e) {
+        drawing = true;
+        hasSigned = true;
+        canvas.style.borderColor = 'var(--border-colour)';
+        const pos = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(pos.x, pos.y);
+        if (e.type === 'touchstart') e.preventDefault();
+      }
+
+      function draw(e) {
+        if (!drawing) return;
+        const pos = getPos(e);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        if (e.type === 'touchmove') e.preventDefault();
+      }
+
+      function stopDrawing() {
+        if (!drawing) return;
+        drawing = false;
+        ctx.closePath();
+      }
+      
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        hasSigned = false;
+        signatureDataInput.value = '';
+      }
+
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mouseout', stopDrawing);
+
+      canvas.addEventListener('touchstart', startDrawing);
+      canvas.addEventListener('touchmove', draw);
+      canvas.addEventListener('touchend', stopDrawing);
+      
+      clearButton.addEventListener('click', clearCanvas);
+
+      form.addEventListener('submit', (e) => {
+        if (!hasSigned) {
+          e.preventDefault();
+          alert('Please provide your signature before submitting.');
+          canvas.style.borderColor = 'var(--danger-colour)';
+          canvas.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        signatureDataInput.value = canvas.toDataURL('image/png');
+      });
+    });
+  </script>
+</body>
+</html>
