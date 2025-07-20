@@ -3,518 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Online Skin Consultation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Facial Consultation</title>
   <style>
-    :root {
-      --primary-color: #006d77;
-      --secondary-color: #83c5be;
-      --bg-color: #edf6f9;
-      --form-bg: #ffffff;
-      --text-color: #333;
-      --label-color: #555;
-      --border-color: #dce1e4;
-      --error-color: #d9534f;
+    body { font-family: Arial; background: #f3f3f3; padding: 40px; }
+    form {
+      background: #fff; padding: 30px; max-width: 600px;
+      margin: auto; border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    body {
-      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 20px;
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, select, textarea {
+      width: 100%; padding: 10px; margin-top: 5px;
+      border-radius: 6px; border: 1px solid #ccc;
     }
-
-    .form-container {
-      max-width: 750px;
-      margin: 20px auto;
-      background: var(--form-bg);
-      padding: 30px 40px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      border-radius: 12px;
-    }
-
-    .form-header h1 {
-      text-align: center;
-      margin: 0 0 10px 0;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--primary-color);
-    }
-
-    .form-header p {
-      text-align: center;
-      margin-bottom: 30px;
-      color: var(--label-color);
-      font-size: 15px;
-    }
-
-    /* Progress Bar */
-    .progress-bar {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 40px;
-      list-style: none;
-      padding: 0;
-    }
-    .progress-bar li {
-      flex: 1;
-      text-align: center;
-      position: relative;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--border-color);
-    }
-    .progress-bar li::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -50%;
-      transform: translateY(-50%);
-      width: 100%;
-      height: 3px;
-      background-color: var(--border-color);
-      z-index: -1;
-    }
-    .progress-bar li:first-child::before {
-      content: none;
-    }
-    .progress-bar li.active {
-      color: var(--primary-color);
-    }
-    .progress-bar li.active::after { /* The dot */
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: var(--primary-color);
-      border-radius: 50%;
-      top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 3px solid var(--bg-color);
-    }
-    .progress-bar li.active::before {
-      background-color: var(--primary-color);
-    }
-
-    /* Form Steps */
-    .form-step {
-      display: none;
-    }
-    .form-step.active {
-      display: block;
-    }
-
-    fieldset {
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 25px;
-      margin-bottom: 25px;
-    }
-    legend {
-      padding: 0 15px;
-      font-weight: 600;
-      font-size: 18px;
-      color: var(--primary-color);
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      font-size: 14px;
-      color: var(--label-color);
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="date"],
-    input[type="tel"],
-    input[type="number"],
-    textarea,
-    select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      box-sizing: border-box;
-      font-size: 15px;
-      font-family: 'Poppins', sans-serif;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    input:focus, textarea:focus, select:focus {
-      outline: none;
-      border-color: var(--secondary-color);
-      box-shadow: 0 0 0 3px rgba(131, 197, 190, 0.3);
-    }
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .form-row {
-      display: flex;
-      gap: 20px;
-    }
-    .form-row .form-group {
-      flex: 1;
-      margin-bottom: 0;
-    }
-    
-    .checkbox-group, .radio-group {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .checkbox-item, .radio-item {
-      display: flex;
-      align-items: center;
-      background: #fdfdfd;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #eee;
-    }
-    .checkbox-item input, .radio-item input {
-      margin-right: 12px;
-    }
-    .checkbox-item label, .radio-item label {
-      margin-bottom: 0;
-      font-weight: 400;
-      flex: 1;
-    }
-
-    /* Buttons */
-    .button-group {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 30px;
-    }
-    .btn {
-      padding: 12px 30px;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-    .btn-next {
-      background-color: var(--primary-color);
-      color: white;
-    }
-    .btn-next:hover {
-      background-color: #005a63;
-    }
-    .btn-prev {
-      background-color: #f0f0f0;
-      color: var(--label-color);
-    }
-    .btn-prev:hover {
-      background-color: #e0e0e0;
-    }
-    .btn-submit {
-      background-color: #28a745;
-      color: white;
-    }
-    .btn-submit:hover {
-      background-color: #218838;
-    }
-
-    /* File Upload */
-    .file-upload-group {
-      margin-bottom: 10px;
-    }
-    .file-upload-label {
-      display: block;
-      padding: 12px;
-      background-color: #f7f7f7;
-      border: 1px dashed var(--border-color);
-      border-radius: 6px;
-      text-align: center;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    .file-upload-label:hover {
-      background-color: #f0f0f0;
-      border-color: var(--secondary-color);
-    }
-    input[type="file"] {
-      display: none;
-    }
-    .file-name {
-        display: inline-block;
-        margin-left: 10px;
-        font-size: 13px;
-        color: var(--label-color);
-    }
-
-    @media (max-width: 600px) {
-      .form-row {
-        flex-direction: column;
-        gap: 0;
-      }
-      .form-row .form-group {
-        margin-bottom: 20px;
-      }
-      .progress-bar {
-        font-size: 12px;
-      }
+    .checkbox-group { margin-top: 10px; }
+    .checkbox-group label { font-weight: normal; margin-right: 10px; }
+    button {
+      margin-top: 20px; padding: 12px 20px;
+      background-color: #4CAF50; color: white;
+      border: none; border-radius: 6px; cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <form action="submit.php" method="post">
+    <h2>Online Facial Consultation</h2>
 
-  <div class="form-container">
-    <div class="form-header">
-      <h1>Online Skin Consultation</h1>
-      <p>Please provide as much detail as possible for an accurate recommendation.</p>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" required />
+
+    <label for="age">Age</label>
+    <input type="number" id="age" name="age" min="10" max="100" />
+
+    <label for="skin">Skin Type</label>
+    <select id="skin" name="skin_type">
+      <option value="Normal">Normal</option>
+      <option value="Oily">Oily</option>
+      <option value="Dry">Dry</option>
+      <option value="Combination">Combination</option>
+      <option value="Sensitive">Sensitive</option>
+    </select>
+
+    <label>Skin Concerns</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="concerns[]" value="Acne" /> Acne</label>
+      <label><input type="checkbox" name="concerns[]" value="Wrinkles" /> Wrinkles</label>
+      <label><input type="checkbox" name="concerns[]" value="Dark Spots" /> Dark Spots</label>
+      <label><input type="checkbox" name="concerns[]" value="Dryness" /> Dryness</label>
+      <label><input type="checkbox" name="concerns[]" value="Redness" /> Redness</label>
     </div>
 
-    <!-- Progress Bar -->
-    <ul class="progress-bar">
-      <li class="active" data-step="1">Personal</li>
-      <li data-step="2">Health</li>
-      <li data-step="3">Lifestyle</li>
-      <li data-step="4">Goals</li>
-    </ul>
+    <label for="notes">Additional Notes</label>
+    <textarea id="notes" name="notes" rows="5"></textarea>
 
-    <form action="https://formsubmit.co/edytapatyk123@gmail.com" method="POST" enctype="multipart/form-data">
-      
-      <!-- FormSubmit.co settings -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://theskinlab28.com/thankyou">
-      <input type="hidden" name="_subject" value="New Online Skin Consultation Submission">
-
-      <!-- Step 1: Personal Information -->
-      <div class="form-step active" data-step="1">
-        <fieldset>
-          <legend>Personal Details</legend>
-          <div class="form-row">
-            <div class="form-group"><label for="first-name">First Name</label><input type="text" id="first-name" name="First Name" required></div>
-            <div class="form-group"><label for="last-name">Last Name</label><input type="text" id="last-name" name="Last Name" required></div>
-          </div>
-          <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="Email" placeholder="you@example.com" required></div>
-          <div class="form-row">
-            <div class="form-group"><label for="age">Age</label><input type="number" id="age" name="Age" placeholder="e.g., 28"></div>
-            <div class="form-group"><label for="date">Date</label><input type="date" id="date" name="Date"></div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Address</legend>
-          <div class="form-group"><input type="text" name="Street Address" placeholder="Street Address"></div>
-          <div class="form-group"><input type="text" name="Street Address Line 2" placeholder="Apartment, suite, etc. (optional)"></div>
-          <div class="form-row">
-            <div class="form-group"><input type="text" name="City" placeholder="City"></div>
-            <div class="form-group"><input type="text" name="Postal / Zip Code" placeholder="Postal / Zip Code"></div>
-          </div>
-        </fieldset>
-        <div class="button-group">
-          <button type="button" class="btn btn-next">Next →</button>
-        </div>
-      </div>
-
-      <!-- Step 2: Health History -->
-      <div class="form-step" data-step="2">
-        <fieldset>
-          <legend>Medical Conditions</legend>
-          <p style="font-size: 13px; color: #666; margin-top: -10px; margin-bottom: 20px;">Please tick any that apply to you.</p>
-          <div class="checkbox-group">
-            <div class="checkbox-item"><input type="checkbox" id="diabetes" name="Conditions[]" value="Diabetes"><label for="diabetes">Diabetes</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="epilepsy" name="Conditions[]" value="Epilepsy"><label for="epilepsy">Epilepsy</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="cancer" name="Conditions[]" value="Cancer / History of Cancer"><label for="cancer">Cancer / History of Cancer</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="blood-pressure" name="Conditions[]" value="High or low blood pressure"><label for="blood-pressure">High or low blood pressure</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="pregnancy" name="Conditions[]" value="Pregnancy / Breastfeeding"><label for="pregnancy">Pregnancy / Breastfeeding</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="heart-disorder" name="Conditions[]" value="Heart/cardiac disorder"><label for="heart-disorder">Heart/cardiac disorder</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="thrombosis" name="Conditions[]" value="Thrombosis/Phlebitis (blood clots)"><label for="thrombosis">Thrombosis/Phlebitis (blood clots)</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="thyroid" name="Conditions[]" value="Thyroid problem"><label for="thyroid">Thyroid problem</label></div>
-            <div class="checkbox-item"><input type="checkbox" id="botox" name="Conditions[]" value="Recently had Botox/Fillers (last 2 weeks)"><label for="botox">Recently had Botox/Fillers (last 2 weeks)</label></div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Contagious Conditions</legend>
-            <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox" id="coldsore" name="Contagious Conditions[]" value="Coldsore (herpes simplex)"><label for="coldsore">Coldsore (herpes simplex)</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="warts" name="Contagious Conditions[]" value="Warts"><label for="warts">Warts</label></div>
-                <div class="checkbox-item"><input type="checkbox" id="conjunctivitis" name="Contagious Conditions[]" value="Infectious eye problems (e.g., Conjunctivitis)"><label for="conjunctivitis">Infectious eye problems (e.g., Conjunctivitis)</label></div>
-            </div>
-        </fieldset>
-        <div class="form-group">
-            <label for="medication">Please list any medications you are currently taking (including supplements).</label>
-            <textarea id="medication" name="Medication" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="allergies">Do you have any known allergies (e.g., to products, ingredients, aspirin, foods)?</label>
-            <textarea id="allergies" name="Allergies" rows="3"></textarea>
-        </div>
-        <div class="button-group">
-          <button type="button" class="btn btn-prev">← Previous</button>
-          <button type="button" class="btn btn-next">Next →</button>
-        </div>
-      </div>
-
-      <!-- Step 3: Skin & Lifestyle -->
-      <div class="form-step" data-step="3">
-        <fieldset>
-          <legend>Your Skin</legend>
-          <div class="form-group">
-            <label>How would you describe your skin type?</label>
-            <div class="radio-group">
-                <div class="radio-item"><input type="radio" id="st-dry" name="Skin Type" value="Dry"><label for="st-dry">Dry (feels tight, may be flaky)</label></div>
-                <div class="radio-item"><input type="radio" id="st-oily" name="Skin Type" value="Oily"><label for="st-oily">Oily (looks shiny, visible pores)</label></div>
-                <div class="radio-item"><input type="radio" id="st-combo" name="Skin Type" value="Combination"><label for="st-combo">Combination (oily T-zone, dry cheeks)</label></div>
-                <div class="radio-item"><input type="radio" id="st-normal" name="Skin Type" value="Normal"><label for="st-normal">Normal (balanced, not too oily or dry)</label></div>
-                <div class="radio-item"><input type="radio" id="st-sensitive" name="Skin Type" value="Sensitive"><label for="st-sensitive">Sensitive (reacts easily, prone to redness)</label></div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>What are your top 3 skin concerns? (Select up to 3)</label>
-            <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox" name="Concerns[]" value="Acne / Breakouts"><label>Acne / Breakouts</label></div>
-                <div class="checkbox-item"><input type="checkbox" name="Concerns[]" value="Fine Lines & Wrinkles"><label>Fine Lines & Wrinkles</label></div>
-                <div class="checkbox-item"><input type="checkbox" name="Concerns[]" value="Pigmentation / Dark Spots"><label>Pigmentation / Dark Spots</label></div>
-                <div class="checkbox-item"><input type="checkbox" name="Concerns[]" value="Redness / Rosacea"><label>Redness / Rosacea</label></div>
-                <div class="checkbox-item"><input type="checkbox" name="Concerns[]" value="Dullness / Lack of Glow"><label>Dullness / Lack of Glow</label></div>
-                <div class="checkbox-item"><input type="checkbox" name="Concerns[]" value="Large Pores"><label>Large Pores</label></div>
-                <div class="checkbox-item"><input type="checkbox" name="Concerns[]" value="Uneven Texture"><label>Uneven Texture</label></div>
-                <div class="checkbox-item"><input type="checkbox" name="Concerns[]" value="Dehydration"><label>Dehydration</label></div>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-            <legend>Lifestyle</legend>
-            <div class="form-group">
-                <label for="water">How much water do you drink daily?</label>
-                <select id="water" name="Water Intake">
-                    <option>Less than 1 litre</option>
-                    <option>1-2 litres</option>
-                    <option>More than 2 litres</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="stress">On a scale of 1-10, what is your average daily stress level?</label>
-                <input type="range" id="stress" name="Stress Level" min="1" max="10" step="1" value="5" oninput="this.nextElementSibling.value = this.value">
-                <output>5</output>
-            </div>
-             <div class="form-group">
-                <label for="sleep">How many hours of sleep do you get on an average night?</label>
-                <input type="text" id="sleep" name="Sleep Hours" placeholder="e.g., 7-8 hours">
-            </div>
-        </fieldset>
-         <div class="button-group">
-          <button type="button" class="btn btn-prev">← Previous</button>
-          <button type="button" class="btn btn-next">Next →</button>
-        </div>
-      </div>
-
-      <!-- Step 4: Routine, Goals & Uploads -->
-      <div class="form-step" data-step="4">
-        <fieldset>
-          <legend>Current Skincare Routine</legend>
-          <p style="font-size: 13px; color: #666; margin-top: -10px; margin-bottom: 20px;">Please list the main products you use. If none, leave blank.</p>
-          <div class="form-group"><label for="routine-cleanser">Cleanser</label><input type="text" id="routine-cleanser" name="Current Cleanser"></div>
-          <div class="form-group"><label for="routine-serum">Serums / Treatments</label><input type="text" id="routine-serum" name="Current Serums"></div>
-          <div class="form-group"><label for="routine-moisturizer">Moisturizer</label><input type="text" id="routine-moisturizer" name="Current Moisturizer"></div>
-          <div class="form-group"><label for="routine-spf">Sunscreen (SPF)</label><input type="text" id="routine-spf" name="Current SPF"></div>
-        </fieldset>
-        <fieldset>
-          <legend>Goals & Photos</legend>
-          <div class="form-group">
-            <label for="skincare-goals">Describe your ideal skin. What are your main goals for our consultation?</label>
-            <textarea id="skincare-goals" name="Skincare Goals" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Please upload 3 clear, makeup-free photos of your skin in good lighting (front, left, right side).</label>
-            <div class="file-upload-group">
-                <label for="photo1" class="file-upload-label">Upload Photo 1 (Front View)</label>
-                <input type="file" id="photo1" name="Photo 1 (Front)" accept="image/*">
-                <span class="file-name"></span>
-            </div>
-            <div class="file-upload-group">
-                <label for="photo2" class="file-upload-label">Upload Photo 2 (Left Side)</label>
-                <input type="file" id="photo2" name="Photo 2 (Left)" accept="image/*">
-                <span class="file-name"></span>
-            </div>
-            <div class="file-upload-group">
-                <label for="photo3" class="file-upload-label">Upload Photo 3 (Right Side)</label>
-                <input type="file" id="photo3" name="Photo 3 (Right)" accept="image/*">
-                <span class="file-name"></span>
-            </div>
-          </div>
-        </fieldset>
-        <div class="button-group">
-          <button type="button" class="btn btn-prev">← Previous</button>
-          <button type="submit" class="btn btn-submit">Submit Consultation</button>
-        </div>
-      </div>
-
-    </form>
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const prevBtns = document.querySelectorAll(".btn-prev");
-      const nextBtns = document.querySelectorAll(".btn-next");
-      const formSteps = document.querySelectorAll(".form-step");
-      const progressSteps = document.querySelectorAll(".progress-bar li");
-
-      let formStepsNum = 0;
-
-      nextBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          formStepsNum++;
-          updateFormSteps();
-          updateProgressbar();
-        });
-      });
-
-      prevBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          formStepsNum--;
-          updateFormSteps();
-          updateProgressbar();
-        });
-      });
-
-      function updateFormSteps() {
-        formSteps.forEach(formStep => {
-          formStep.classList.remove("active");
-        });
-        formSteps[formStepsNum].classList.add("active");
-      }
-      
-      function updateProgressbar() {
-        progressSteps.forEach((progressStep, idx) => {
-          if (idx < formStepsNum + 1) {
-            progressStep.classList.add("active");
-          } else {
-            progressStep.classList.remove("active");
-          }
-        });
-      }
-
-      // File upload name display
-      const fileInputs = document.querySelectorAll('input[type="file"]');
-      fileInputs.forEach(input => {
-          input.addEventListener('change', function() {
-              const fileName = this.files[0] ? this.files[0].name : "";
-              const nextSpan = this.nextElementSibling;
-              if (nextSpan && nextSpan.classList.contains('file-name')) {
-                  nextSpan.textContent = fileName;
-              }
-          });
-      });
-
-    });
-  </script>
-
+    <button type="submit">Submit</button>
+  </form>
 </body>
 </html>
